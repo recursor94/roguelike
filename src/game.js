@@ -32,19 +32,22 @@ function create() {
 function update () {
     var cursors = game.input.keyboard.createCursorKeys();
     var sprintKey = game.input.keyboard.addKey(Phaser.Keyboard.shiftKey);
+    var spaceBar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    var upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    var downKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    var rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+    var leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
    // player.body.velocity.x = 0;
 
-    console.log(player.body.onFloor());
-    console.log(sprintKey);
-    if(cursors.left.isDown) {
+    if(cursors.left.isDown || leftKey.isDown) {
 	player.body.velocity.x = -150;
     }
-    else if (cursors.right.isDown) {
+    else if (cursors.right.isDown || rightKey.isDown) {
 	player.body.velocity.x = 150;
     }
 
     if(sprintKey.isDown) {
-	if(cursors.right.isDown) {
+	if(cursors.right.isDown || downKey.isDown) {
 	    console.log(player.body.velocity.x);
 	    player.body.velocity.x = player.velocity.x + 100000;
 	}
@@ -55,11 +58,11 @@ function update () {
 	    }
     }
 
-    if(cursors.up.isDown && player.body.onFloor()) {
+    if(spaceBar.isDown  && player.body.onFloor()) {
 	player.body.velocity.y = -320;
     }
 
-    
+
 
     
 }
