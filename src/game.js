@@ -1,5 +1,7 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update});
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {preload: preload, create: create, update: update, render: render});
 var player = null;
+
+
 
 function preload() {
 
@@ -25,7 +27,28 @@ function create() {
 }
 
 function update () {
+    var cursors = game.input.keyboard.createCursorKeys();
+    player.body.velocity.x = 0;
 
+    console.log(player.body.touching.down);
+    
+    if(cursors.left.isDown) {
+	player.body.velocity.x = -150;
+    }
+    else if (cursors.right.isDown) {
+	player.body.velocity.x = 150;
+    }
+
+    if(cursors.up.isDown && player.body.touching.down) {
+	player.body.velocity.y = -350;
+    }
 
     
+
+    
+}
+function render() {
+    Phaser.Physics.Arcade.Body.render(game.canvas, player.body,
+				      false, "#F00");
+
 }
